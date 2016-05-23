@@ -5,7 +5,6 @@ use Zend\ModuleManager\Feature\HydratorProviderInterface;
 use Zend\ModuleManager\Feature\InputFilterProviderInterface;
 use Zend\Stdlib\ArrayUtils;
 
-
 /**
  * Class Module
  */
