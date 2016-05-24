@@ -104,7 +104,7 @@ return [
     'zf-hal' => [
         // map each class (by name) to their metadata mappings
         'metadata_map' => [
-            'Strapieno\NightClubGirlAvatar\Model\Entity\NightClubEntity' => [
+            'Strapieno\NightClubGirlAvatar\Model\Entity\AvatarEntity' => [
                 'entity_identifier_name' => 'id',
                 'route_name' => 'api-rest/nightclub/girl/avatar',
                 'route_identifier_name' => 'girl_id',

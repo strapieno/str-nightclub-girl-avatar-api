@@ -6,6 +6,10 @@ use Matryoshka\Model\Wrapper\Mongo\Criteria\ActiveRecord\ActiveRecordCriteria;
 use Strapieno\NightClub\Model\NightClubModelAwareInterface;
 use Strapieno\NightClub\Model\NightClubModelAwareTrait;
 use Strapieno\NightClubCover\Model\Entity\NightClubCoverAwareInterface;
+use Strapieno\NightClubGirl\Model\GirlModelAwareInterface;
+use Strapieno\NightClubGirl\Model\GirlModelAwareTrait;
+use Strapieno\NightClubGirlAvatar\Model\AvatarAwareInterface;
+use Strapieno\NightClubGirlAvatar\Model\AvatarAwareTrait;
 use Strapieno\User\Model\Entity\UserInterface;
 use Strapieno\User\Model\UserModelAwareInterface;
 use Strapieno\User\Model\UserModelAwareTrait;
@@ -23,11 +27,11 @@ use Zend\ServiceManager\ServiceLocatorAwareTrait;
  */
 class NightClubRestListener implements ListenerAggregateInterface,
     ServiceLocatorAwareInterface,
-    NightClubModelAwareInterface
+    GirlModelAwareInterface
 {
     use ListenerAggregateTrait;
     use ServiceLocatorAwareTrait;
-    use NightClubModelAwareTrait;
+    use GirlModelAwareTrait;
 
     /**
      * {@inheritdoc}
@@ -49,9 +53,9 @@ class NightClubRestListener implements ListenerAggregateInterface,
         }
 
         $id  = $e->getParam('id');
-        $nightClub = $this->getNightClubFromId($id);
+        $girl = $this->getGirlFromId($id);
 
-        if ($nightClub instanceof NightClubCoverAwareInterface && $nightClub instanceof ActiveRecordInterface) {
+        if ($girl instanceof AvatarAwareInterface && $girl instanceof ActiveRecordInterface) {
 
             /** @var $router RouteInterface */
             $router = $serviceLocator->get('Router');
@@ -61,8 +65,8 @@ class NightClubRestListener implements ListenerAggregateInterface,
             );
 
             $now = new \DateTime();
-            $nightClub->setCover($url . '?lastUpdate=' . $now->getTimestamp());
-            $nightClub->save();
+            $girl->setAvatar($url . '?lastUpdate=' . $now->getTimestamp());
+            $girl->save();
         }
     }
 
@@ -73,12 +77,12 @@ class NightClubRestListener implements ListenerAggregateInterface,
     {
 
         $id  = $e->getParam('id');
-        $nightClub = $this->getNightClubFromId($id);
+        $girl = $this->getGirlFromId($id);
 
-        if ($nightClub instanceof NightClubCoverAwareInterface && $nightClub instanceof ActiveRecordInterface) {
+        if ($girl instanceof AvatarAwareInterface && $girl instanceof ActiveRecordInterface) {
 
-            $nightClub->setCover(null);
-            $nightClub->save();
+            $girl->setAvatar(null);
+            $girl->save();
         }
     }
 
@@ -86,9 +90,9 @@ class NightClubRestListener implements ListenerAggregateInterface,
      * @param $id
      * @return UserInterface|null
      */
-    protected function getNightClubFromId($id)
+    protected function getGirlFromId($id)
     {
-        return $this->getNightClubModelService()->find((new ActiveRecordCriteria())->setId($id))->current();
+        return $this->getNightClubGirlModelService()->find((new ActiveRecordCriteria())->setId($id))->current();
 
     }
 }
