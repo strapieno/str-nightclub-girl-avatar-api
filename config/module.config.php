@@ -1,19 +1,19 @@
 <?php
 return [
-    // Config of nightclub_id in route exist
-    'nightclub-not-found' => [
-        'api-rest/nightclub/girl/avatar'
-    ],
     'service_manager' => [
         'factories' => [
             'Strapieno\Utils\Listener\ListenerManager' => 'Strapieno\Utils\Listener\ListenerManagerFactory'
         ],
         'invokables' => [
-            'Strapieno\Utils\Delegator\AttachListenerDelegator' =>  'Strapieno\Utils\Delegator\AttachListenerDelegator'
+            'Strapieno\Utils\Delegator\AttachRestResourceListenerDelegator' => 'Strapieno\Utils\Delegator\AttachRestResourceListenerDelegator'
         ],
         'aliases' => [
             'listenerManager' => 'Strapieno\Utils\Listener\ListenerManager'
         ]
+    ],
+    // Config of nightclub_id in route exist
+    'nightclub-not-found' => [
+        'api-rest/nightclub/girl/avatar'
     ],
     // Register listener to listener manager
     'service-listeners' => [
@@ -21,19 +21,19 @@ return [
             'Strapieno\NightClub\Model\NightClubModelInizializer'
         ],
         'invokables' => [
-            'Strapieno\NightClubCover\Api\Listener\NightClubRestListener'
-                => 'Strapieno\NightClubCover\Api\Listener\NightClubRestListener'
+            'Strapieno\NightClubGirlAvatar\Api\Listener\NightClubGirlRestListener'
+                => 'Strapieno\NightClubGirlAvatar\Api\Listener\NightClubGirlRestListener'
         ]
     ],
-    'attach-listeners' => [
+    'attach-resource-listeners' => [
         'Strapieno\NightClubCover\Api\V1\Rest\Controller' => [
-            'Strapieno\NightClubCover\Api\Listener\NightClubRestListener'
+            'Strapieno\NightClubGirlAvatar\Api\Listener\NightClubGirlRestListener'
         ]
     ],
     'controllers' => [
         'delegators' => [
             'Strapieno\NightClubCover\Api\V1\Rest\Controller' => [
-                'Strapieno\Utils\Delegator\AttachListenerDelegator',
+                'Strapieno\Utils\Delegator\AttachRestResourceListenerDelegator',
             ]
         ],
     ],

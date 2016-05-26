@@ -27,8 +27,8 @@
   },
   "autoload": {
     "psr-4": {
-      "Strapieno\\NightClubCover\\Api\\": "src/",
-      "Strapieno\\NightClubCover\\ApiTest\\": "tests/"
+      "Strapieno\\NightClubGirlAvatar\\Api\\": "src/",
+      "Strapieno\\NightClubGirlAvatar\\ApiTest\\": "tests/"
     },
     "classmap": [
       "./Module.php"
