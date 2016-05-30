@@ -1,3 +1,3 @@
 # Strapieno nightclub girl avatar api
 
-[![download](https://img.shields.io/packagist/dt/strapieno/str-nightclub-girl-avatar-api.svg?maxAge=2592000)](https://packagist.org/packages/strapieno/str-nightclub-girl-avatar-api)
+[![Packagist](https://img.shields.io/packagist/dt/strapieno/str-nightclub-girl-avatar-api.svg?maxAge=2592000)](https://packagist.org/packages/strapieno/str-nightclub-girl-avatar-api) [![Travis](https://img.shields.io/travis/strapieno/str-nightclub-girl-avatar-api/develop.svg?maxAge=2592000)](https://travis-ci.org/strapieno/str-nightclub-girl-avatar-api) [![Coveralls](https://img.shields.io/coveralls/strapieno/str-nightclub-girl-avatar-api/develop.svg?style=flat-square)](https://coveralls.io/github/strapieno/str-nightclub-girl-avatar-api)
