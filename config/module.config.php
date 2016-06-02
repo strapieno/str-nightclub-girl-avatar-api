@@ -18,7 +18,7 @@ return [
     // Register listener to listener manager
     'service-listeners' => [
         'initializers' => [
-            'Strapieno\NightClub\Model\NightClubModelInizializer'
+            'Strapieno\NightClub\Model\NightClubModelInitializer'
         ],
         'invokables' => [
             'Strapieno\NightClubGirlAvatar\Api\Listener\NightClubGirlRestListener'
