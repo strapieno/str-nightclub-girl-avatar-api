@@ -27,7 +27,7 @@ return [
     ],
     'attach-resource-listeners' => [
         'Strapieno\NightClubGirlAvatar\Api\V1\Rest\Controller' => [
-            'Strapieno\NightClubGirlAvatar\Api\Listener\NightClubRestListener'
+            'Strapieno\NightClubGirlAvatar\Api\Listener\NightClubGirlRestListener'
         ]
     ],
     'controllers' => [
