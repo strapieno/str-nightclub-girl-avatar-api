@@ -79,7 +79,7 @@ return [
             'page_size' => 10,
             'page_size_param' => 'page_size',
             'collection_class' => 'Zend\Paginator\Paginator',
-            'entity_class' => 'Strapieno\NightClubGirlAvatar\Model\Entity\NightClubGirlAvatarEntity'
+            'entity_class' => 'Strapieno\NightClubGirlAvatar\Model\Entity\AvatarEntity'
         ]
     ],
     'zf-content-negotiation' => [
