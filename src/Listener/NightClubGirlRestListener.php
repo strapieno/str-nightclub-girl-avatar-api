@@ -53,7 +53,7 @@ class NightClubGirlRestListener implements ListenerAggregateInterface,
         $id  = $e->getParam('id');
         $girl = $this->getGirlFromId($id);
         $image = $e->getParam('image');
-        $image->setId($id);
+
         if ($girl instanceof AvatarAwareInterface && $girl instanceof ActiveRecordInterface) {
 
             $girl->setAvatar($this->getUrlFromImage($image, $serviceLocator));
