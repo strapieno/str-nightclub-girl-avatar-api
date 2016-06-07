@@ -106,7 +106,10 @@ class NightClubGirlRestListener implements ListenerAggregateInterface,
         /** @var $router RouteInterface */
         $router = $serviceLocator->get('Router');
         $url = $router->assemble(
-            ['nightclub_id' => $image->getId()],
+            [
+                'nightclub_id' => $serviceLocator->get('Application')->getMvcEvent()->getRouteMatch()->getParam('nightclub_id'),
+                'girl_id' => $image->getId()
+            ],
             ['name' => 'api-rest/nightclub/girl/avatar', 'force_canonical' => true]
         );
 

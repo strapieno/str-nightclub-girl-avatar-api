@@ -5,8 +5,13 @@ use ImgMan\Apigility\Entity\ImageEntity;
 use Strapieno\NightClubCover\Api\Listener\NightClubRestListener;
 use Strapieno\NightClubGirlAvatar\Api\Listener\NightClubGirlRestListener;
 use Strapieno\UserAvatar\Api\Listener\UserRestListener;
+use Zend\EventManager\EventManager;
+use Zend\Http\Request;
+use Zend\Http\Response;
+use Zend\Mvc\Application;
 use Zend\Mvc\Controller\PluginManager;
 use Zend\Mvc\Router\Http\TreeRouteStack;
+use Zend\Mvc\Router\RouteMatch;
 use Zend\ServiceManager\ServiceManager;
 use Zend\Uri\Http;
 use ZF\Rest\ResourceEvent;
@@ -27,13 +32,13 @@ class NightClubGirlRestListenerTest extends \PHPUnit_Framework_TestCase
                     'nightclub' => [
                         'type' => 'Segment',
                         'options' => [
-                            'route' => '/nightclub',
+                            'route' => '/nightclub[/:nightclub_id]',
                         ],
                         'child_routes' => [
                             'girl' => [
                                 'type' => 'Segment',
                                 'options' => [
-                                    'route' => '/girl'
+                                    'route' => '/girl[/:girl_id]',
                                 ],
                                 'child_routes' => [
                                     'avatar' => [
@@ -71,12 +76,30 @@ class NightClubGirlRestListenerTest extends \PHPUnit_Framework_TestCase
         $route = TreeRouteStack::factory($this->routeConfig);
         $route->setRequestUri(new Http('www.test.com'));
 
+        $routerMatch = new RouteMatch(['nightclub_id' => 'test']);
+
+        $mvcEvent = $this->getMockBuilder('Zend\Mvc\MvcEvent')
+            ->disableOriginalConstructor()
+            ->setMethods(['getRouteMatch'])
+            ->getMock();
+
+        $mvcEvent->method('getRouteMatch')
+            ->willReturn($routerMatch);
+
+        $application = $this->getMockBuilder('Zend\Mvc\Application')
+            ->disableOriginalConstructor()
+            ->setMethods(['getMvcEvent'])
+            ->getMock();
+
+        $application->method('getMvcEvent')
+            ->willReturn($mvcEvent);
+
         $sm = new ServiceManager();
         $sm->setService('Router', $route);
+        $sm->setService('Application', $application);
 
         $abstractLocator = new PluginManager();
         $abstractLocator->setServiceLocator($sm);
-
 
         $image = $this->getMockBuilder('Strapieno\NightClubGirlAvatar\ApiTest\Asset\Image')
             ->getMock();
@@ -111,7 +134,7 @@ class NightClubGirlRestListenerTest extends \PHPUnit_Framework_TestCase
         $resource = new ResourceEvent();
         $resource->setParam('id', 'test');
         $imageService = new  ImageEntity();
-
+        $imageService->setId('test');
 
         $sm = new ServiceManager();
         $abstractLocator = new PluginManager();
