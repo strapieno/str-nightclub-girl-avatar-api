@@ -108,7 +108,7 @@ return [
                 'entity_identifier_name' => 'id',
                 'route_name' => 'api-rest/nightclub/girl/avatar',
                 'route_identifier_name' => 'girl_id',
-                'hydrator' => 'Zend\Stdlib\Hydrator\ClassMethods',
+                'hydrator' => 'Strapieno\Utils\Hydrator\ImageBase64Hydrator',
             ],
         ],
     ],

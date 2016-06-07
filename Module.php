@@ -8,7 +8,7 @@ use Zend\Stdlib\ArrayUtils;
 /**
  * Class Module
  */
-class Module
+class Module implements HydratorProviderInterface
 {
     /**
      * @return array
@@ -30,5 +30,13 @@ class Module
                 ],
             ],
         ];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getHydratorConfig()
+    {
+        return include __DIR__ . '/config/hydrator.config.php';
     }
 }
